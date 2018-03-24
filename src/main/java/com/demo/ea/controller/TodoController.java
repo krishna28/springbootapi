@@ -2,6 +2,8 @@ package com.demo.ea.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/todo")
 public class TodoController {
 	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	TodoService todoService;
 	
@@ -43,18 +47,33 @@ public class TodoController {
 	
 
 	@PostMapping
-	public void createTodo(@RequestBody Todo todo){
-		System.out.println("the idea"+ todo);
+	public Todo createTodo(@RequestBody Todo todo){
+		try{
 		todoService.create(todo);
+		return todo;
+		}catch(Exception e){
+			logger.error("error while saving",e);	
+		}
+		return null;
 	}
 	
 	@PutMapping("/{id}")
-	public void updateTodo(@PathVariable String id,@RequestBody Todo todo){
+	public Todo updateTodo(@PathVariable String id,@RequestBody Todo todo){
+		try{
 		todoService.updateTodo(id,todo);
+		return todo;
+		}catch(Exception e){
+			logger.error("Error while updating",e);
+		}
+		return null;
 	}
 	@DeleteMapping("/{id}")
 	public void deleteTodo(@PathVariable String id){
+		try{
 		todoService.deleteTodo(id);
+		}catch(Exception e){
+			logger.error("error while deleting",e);
+		}
 	}
 	
 }
