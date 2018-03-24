@@ -48,6 +48,7 @@ public class TodoController {
 
 	@PostMapping
 	public Todo createTodo(@RequestBody Todo todo){
+		logger.debug("create call todo {}",todo);
 		try{
 		todoService.create(todo);
 		return todo;
@@ -59,6 +60,7 @@ public class TodoController {
 	
 	@PutMapping("/{id}")
 	public Todo updateTodo(@PathVariable String id,@RequestBody Todo todo){
+		logger.debug("update call todo {}",todo);
 		try{
 		todoService.updateTodo(id,todo);
 		return todo;

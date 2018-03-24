@@ -35,6 +35,7 @@ public class TodoServiceImpl implements TodoService {
 	public void updateTodo(String id,Todo todo) {
 		Todo todoInstance  = getTodo(id);
 		todoInstance.setStatus(todo.getStatus());
+		todoInstance.setDescription(todo.getDescription());
 		todoInstance.setDateUpdated(new Date());
 		todoDao.save(todoInstance);
 	}

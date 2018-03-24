@@ -5,3 +5,4 @@ spring:
   data:
     mongodb:
       uri: mongodb://${D_USERNAME}:${D_PASSWORD}@ds123499.mlab.com:23499/boottodo  
+       #uri: mongodb://127.0.0.1/todo
